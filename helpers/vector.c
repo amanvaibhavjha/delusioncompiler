@@ -29,6 +29,7 @@ struct vector *vector_create_no_saves(size_t esize)
     vector->pindex = 0;
     vector->esize = esize;
     vector->count = 0;
+    return vector;
 }
 
 size_t vector_total_size(struct vector *vector)
@@ -303,7 +304,7 @@ void vector_stretch(struct vector *vector, int index)
     vector->rindex = index;
 }
 
-int vector_pop_value(struct vector* vector, void* val)
+void vector_pop_value(struct vector* vector, void* val)
 {
     int old_pp = vector->pindex;
     vector_set_peek_pointer(vector, 0);
@@ -317,7 +318,7 @@ int vector_pop_value(struct vector* vector, void* val)
             break;
         }
         ptr = vector_peek_ptr(vector);
-        index++;
+        index++; 
     }
 
     vector_set_peek_pointer(vector, old_pp);
